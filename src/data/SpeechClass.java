@@ -17,7 +17,7 @@ import us.monoid.web.Resty;
 
 public class SpeechClass {
 
-	private static final String BASE_URL = "http://translate.google.com/translate_tts?ie=UTF-8&q={0}&tl={1}&prev=input";
+	private static final String URL = "http://translate.google.com/translate_tts?ie=UTF-8&q={0}&tl={1}&prev=input";
 
 	/*
 	 * say(text,accent)  is a function to get the voice output of the given "text"
@@ -28,8 +28,8 @@ public class SpeechClass {
 	public static void say(String text, String accent) {
 		try {
 			File f = new File("temp.mp3");
-			String sentence = URLEncoder.encode(text, "UTF-8");
-			String urlString = MessageFormat.format(BASE_URL, sentence, accent);
+			String TextInput = URLEncoder.encode(text, "UTF-8");
+			String urlString = MessageFormat.format(URL, TextInput, accent);
 			BinaryResource res = new Resty().bytes(new URI(urlString));
 			res.save(f);
 
@@ -44,7 +44,8 @@ public class SpeechClass {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
+			//	e.printStackTrace();
+			say("The text enterd is too big, be a little less greedy", "en-us");
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		} catch (JavaLayerException e) {

@@ -49,27 +49,35 @@ public class TextToSpeech {
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
+		
 		frm = new Shell();
 		frm.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BORDER));
 		frm.setSize(450, 300);
-		frm.setText("Text-To-Speech");
+		frm.setText("Voicedroid");
+	
+		final Button fr = new Button(frm, SWT.RADIO);
+		fr.setFont(SWTResourceManager.getFont("Terminal", 9, SWT.BOLD));
+		fr.setBounds(72, 160, 90, 16);
+		fr.setText("French");
+		fr.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BORDER));
 
+		
 		final Button in = new Button(frm, SWT.RADIO);
 		in.setFont(SWTResourceManager.getFont("Terminal", 9, SWT.BOLD));
-		in.setBounds(70, 138, 90, 16);
+		in.setBounds(72, 182, 90, 16);
 		in.setText("Indian");
 		in.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BORDER));
 
 		final Button am = new Button(frm, SWT.RADIO);
 		am.setFont(SWTResourceManager.getFont("Terminal", 9, SWT.BOLD));
 		am.setSelection(true);
-		am.setBounds(70, 116, 90, 16);
+		am.setBounds(72, 116, 90, 16);
 		am.setText("American");
 		am.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BORDER));
 
 		final Button br = new Button(frm, SWT.RADIO);
 		br.setFont(SWTResourceManager.getFont("Terminal", 9, SWT.BOLD));
-		br.setBounds(70, 160, 90, 16);
+		br.setBounds(72, 138, 90, 16);
 		br.setText("British");
 		br.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BORDER));
 		
@@ -89,8 +97,9 @@ public class TextToSpeech {
 					SpeechClass.say(T1.getText(), "en-uk");
 				} else if (am.getSelection()) {
 					SpeechClass.say(T1.getText(), "en-us");
-				}  
-				
+				}  else if(fr.getSelection()) {
+					SpeechClass.say(T1.getText(), "fr");
+				}  				
 			}
 		});
 
@@ -107,7 +116,7 @@ public class TextToSpeech {
 		lblNewLabel.setBackground(SWTResourceManager
 				.getColor(SWT.COLOR_WIDGET_BORDER));
 		lblNewLabel.setBounds(348, 247, 86, 15);
-		lblNewLabel.setText("\u00A9 Arjun Mahishi");
+		lblNewLabel.setText("\u00A9 ArjunMahishi");
 
 		Label lblEnterText = new Label(frm, SWT.NONE);
 		lblEnterText.setFont(SWTResourceManager
@@ -129,6 +138,22 @@ public class TextToSpeech {
 
 		Menu menu = new Menu(frm);
 		frm.setMenu(menu);
-
+		
+		Button btnNewButton_1 = new Button(frm, SWT.NONE);
+		btnNewButton_1.setFont(SWTResourceManager.getFont("Terminal", 9, SWT.BOLD));
+		btnNewButton_1.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				String str = "Hello.. Use the textbox to enter the text you want to hear, choose the accent and click on speak.";
+				T1.setText("");
+				SpeechClass.say(str, "en-us");
+				}
+		});
+		btnNewButton_1.setBounds(298, 138, 90, 25);
+		btnNewButton_1.setText("&Help");
+		
+		
+		
+		
 	}
 }
